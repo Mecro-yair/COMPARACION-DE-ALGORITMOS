@@ -58,14 +58,10 @@ int main() {
 // Búsqueda Secuencial
 int SecuencialOrd(int A[], int n, int dato, int& comparaciones) {
     int i = 0;
-    comparaciones = 0; 
 
     while (i < n && A[i] < dato) {
-        comparaciones++; 
         i++;
     }
-    
-    comparaciones++; 
     if (i >= n || A[i] > dato) {
         return -i;
     } else {
@@ -75,15 +71,12 @@ int SecuencialOrd(int A[], int n, int dato, int& comparaciones) {
 
 void tiempoSecuencial(int A[], int n, int dato) {
     const int repeticiones = 100000;  
-    int comparaciones = 0;
     int resultado = -1;
 
     auto inicio = chrono::high_resolution_clock::now();
 
     for (int i = 0; i < repeticiones; i++) {
-        int tempComparaciones = 0;
-        resultado = SecuencialOrd(A, n, dato, tempComparaciones);
-        comparaciones = tempComparaciones;  
+        resultado = SecuencialOrd(A, n, dato, tempComparaciones); 
     }
 
     auto fin = chrono::high_resolution_clock::now();
@@ -106,10 +99,8 @@ int Binaria(int A[], int n, int dato, int& comparaciones) {
     int izq = 0;
     int der = n - 1; 
     int pos = -1;
-    comparaciones = 0; 
 
-    while (izq <= der) {
-        comparaciones++; 
+    while (izq <= der) { 
         int m = (izq + der) / 2;
         if (A[m] == dato) {
             return m; 
@@ -125,12 +116,10 @@ int Binaria(int A[], int n, int dato, int& comparaciones) {
 
 void tiempoBinaria(int A[], int n, int dato) {
     const int repeticiones = 100000;
-    int comparaciones_totales = 0;
     
     int resultado = Binaria(A, n, dato, comparaciones_totales);
     
     auto inicio = chrono::high_resolution_clock::now();
-    int comparaciones = 0;
 
     for (int i = 0; i < repeticiones; i++) {
         resultado = Binaria(A, n, dato, comparaciones);
@@ -141,5 +130,5 @@ void tiempoBinaria(int A[], int n, int dato) {
 
     cout << "\nEl tiempo total de ejecución para " << repeticiones << " repeticiones de la Búsqueda Binaria fue de: " << duracion.count() << " milisegundos." << endl;
     cout << "El tiempo promedio por ejecución fue de: " << duracion.count() / repeticiones << " milisegundos." << endl;
-    cout << "Número total de comparaciones en la última búsqueda: " << comparaciones << endl; 
+    
 }
