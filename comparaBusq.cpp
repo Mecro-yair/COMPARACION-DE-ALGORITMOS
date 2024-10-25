@@ -5,8 +5,8 @@
 using namespace std;
 
 // Prototipos
-int SecuencialOrd(int[], int, int, int&);
-int Binaria(int[], int, int, int&);
+int SecuencialOrd(int[], int, int);
+int Binaria(int[], int, int);
 void tiempoSecuencial(int[], int, int);
 void tiempoBinaria(int[], int, int);
 
@@ -56,7 +56,7 @@ int main() {
 }
 
 // Búsqueda Secuencial
-int SecuencialOrd(int A[], int n, int dato, int& comparaciones) {
+int SecuencialOrd(int A[], int n, int dato) {
     int i = 0;
 
     while (i < n && A[i] < dato) {
@@ -76,7 +76,7 @@ void tiempoSecuencial(int A[], int n, int dato) {
     auto inicio = chrono::high_resolution_clock::now();
 
     for (int i = 0; i < repeticiones; i++) {
-        resultado = SecuencialOrd(A, n, dato, tempComparaciones); 
+        resultado = SecuencialOrd(A, n, dato); 
     }
 
     auto fin = chrono::high_resolution_clock::now();
@@ -91,11 +91,10 @@ void tiempoSecuencial(int A[], int n, int dato) {
     else
         cout << "Número no encontrado. " << resultado << endl;
 
-    cout << "Número de comparaciones en la última búsqueda: " << comparaciones << endl;
 }
 
 // Búsqueda Binaria
-int Binaria(int A[], int n, int dato, int& comparaciones) {
+int Binaria(int A[], int n, int dato) {
     int izq = 0;
     int der = n - 1; 
     int pos = -1;
@@ -117,12 +116,12 @@ int Binaria(int A[], int n, int dato, int& comparaciones) {
 void tiempoBinaria(int A[], int n, int dato) {
     const int repeticiones = 100000;
     
-    int resultado = Binaria(A, n, dato, comparaciones_totales);
+    int resultado = Binaria(A, n, dato);
     
     auto inicio = chrono::high_resolution_clock::now();
 
     for (int i = 0; i < repeticiones; i++) {
-        resultado = Binaria(A, n, dato, comparaciones);
+        resultado = Binaria(A, n, dato);
     }
 
     auto fin = chrono::high_resolution_clock::now();
